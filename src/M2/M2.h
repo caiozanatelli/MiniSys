@@ -15,12 +15,20 @@
 #define JLZ 9
 #define JZE 10
 #define HLT 11
+#define LXD 12
+#define SXD 13
+#define LAX 14
+#define SAX 15
+#define LCD 16
+#define JCC 17
 
 // Struct that defines a data type for the M2 simulator
 typedef struct {
 	Memory memory;
 	int PC;	// Program Counter
 	int AC; // Accumulator
+	int RC; // Array Counter
+	int RX; // Array Index
 } M2;
 
 void initM2(M2 *vm, int initMemPos);
