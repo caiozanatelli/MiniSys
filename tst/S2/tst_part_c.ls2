@@ -1,0 +1,9 @@
+INP A
+INP B
+LXD B
+LCD A
+JCC L
+L OUT A
+HLT
+A DC 5
+B DC 0
