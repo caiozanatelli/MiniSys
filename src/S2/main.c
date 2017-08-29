@@ -4,7 +4,6 @@
 
 #define POS_INPUT_FILE  1
 #define POS_OUTPUT_FILE 2
-#define TABLE_SIZE		52
 
 int main(int argc, char **argv) {
 	if (argc != 3) {
