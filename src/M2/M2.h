@@ -21,6 +21,10 @@
 #define SAX 15
 #define LCD 16
 #define JCC 17
+#define CAL 18
+#define RET 19
+#define LAI 20
+#define SAI 21
 
 // Struct that defines a data type for the M2 simulator
 typedef struct {

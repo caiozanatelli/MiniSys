@@ -6,6 +6,7 @@
 // Initialize the M2 Simulator
 void initM2(M2 *vm, int initMemPos) {
 	initMemory(vm->memory);
+
 	vm->PC = initMemPos;
 	vm->AC = 0;
 }
@@ -95,6 +96,70 @@ void runProgram(M2 *vm) {
 
 			case HLT:
 				// End of program
+			break;
+
+			// Direct load: RX <- (M)
+			case LXD:
+				readMemory(vm->memory, &memValueAtPos, pos);
+				vm->RX = memValueAtPos;
+			break;
+
+			// Direct store: (M) <- RX
+			case SXD:
+				writeMemory(vm->memory, vm->RX, pos);
+			break;
+
+			// Indexed load: AC <- (RX); RX <- RX + 1
+			case LAX:
+				readMemory(vm->memory, &memValueAtPos, vm->RX);
+				vm->AC = memValueAtPos;
+				vm->RX++;
+			break;
+
+			// Indexed store: (RX) <- AC; RX <- RX + 1
+			case SAX:
+				writeMemory(vm->memory, vm->AC, vm->RX);
+				vm->RX++;
+			break;
+
+			// Direct store: RC <- (M)
+			case LCD:
+				readMemory(vm->memory, &memValueAtPos, pos);
+				vm->RC = memValueAtPos;
+			break;
+
+			// Count and jump: RC <- RC - 1; if (RC > 0) then PC <- M
+			case JCC:
+				vm->RC--;
+				if (vm->RC > 0) {
+					vm->PC = pos;
+				}
+			break;
+
+			// Call a subprogram: RX <- PC; PC <- M
+			case CAL:
+				vm->RX = vm->PC;
+				vm->PC = pos;
+			break;
+
+			// Return to previous PC: PC <- RX
+			case RET:
+				vm->PC = vm->RX;
+			break;
+
+			case LAI:
+				readMemory(vm->memory, &memValueAtPos, vm->RX);
+				readMemory(vm->memory, &memValueAtPos, vm->RX + memValueAtPos + 1);
+
+				vm->AC = memValueAtPos;
+				vm->RX++;
+			break;
+
+			case SAI:
+				readMemory(vm->memory, &memValueAtPos, vm->RX);
+				writeMemory(vm->memory, vm->AC, vm->RX + memValueAtPos + 1);
+				
+				vm->RX++;
 			break;
 
 			default:

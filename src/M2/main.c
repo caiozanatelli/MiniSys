@@ -23,7 +23,10 @@ int main(int argc, char **argv) {
 
 	// Load a program into memory and execute it through an M2 Simulator
 	loadProgram(&vm, argv[POS_FILE_DIR]);
+
+	//printMemory(vm.memory);
 	runProgram(&vm);
+	//printMemory(vm.memory);
 
 	return 0;
 }

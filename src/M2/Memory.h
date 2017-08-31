@@ -1,7 +1,7 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
-#define MAX_MEM 256
+#define MAX_MEM 50
 #define TRUE    1
 #define FALSE   0
 
