@@ -1,0 +1,10 @@
+  INP A
+  
+  DOB A
+  SAD D
+  OUT D
+  
+  HLT
+ 
+A DC 0
+D DC 0

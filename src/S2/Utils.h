@@ -23,12 +23,16 @@
 #define RET 19
 #define LAI 20
 #define SAI 21
+#define DOB 22
+#define MET 23
+#define JPA 24
 
 #define OPERAND_SIZE 10
 
 #define TRUE  1
 #define FALSE 0
 
+// Definition of a data type that contains all of the three possible terms of an instruction
 typedef struct {
 	char firstTerm[OPERAND_SIZE];
 	char secondTerm[OPERAND_SIZE];

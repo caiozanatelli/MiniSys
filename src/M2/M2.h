@@ -25,10 +25,14 @@
 #define RET 19
 #define LAI 20
 #define SAI 21
+#define DOB 22
+#define MET 23
+#define JPA 24
 
 // Struct that defines a data type for the M2 simulator
 typedef struct {
 	Memory memory;
+	int initialPos;
 	int PC;	// Program Counter
 	int AC; // Accumulator
 	int RC; // Array Counter

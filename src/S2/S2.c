@@ -71,11 +71,9 @@ void writeInstruction(SymbolTable *table, FILE **outputFile, char *firstOp, char
 		}
 		else if (strcmp(firstOp, "DA") == 0) {
 			symbol = secondOp[0];
-			fprintf(*outputFile, "%d\n", getTableValueAt(table, getSymbolPosition(symbol)) - *ILC);
+			fprintf(*outputFile, "%d\n", getTableValueAt(table, getSymbolPosition(symbol)));
 		}
 		else if (strcmp(firstOp, "DS") == 0) {
-			printf("AQUIII PORRA\n\n");
-			printf("Value %d\n\n", value);
 			while (value--) {
 				fprintf(*outputFile, "%d\n", 0);
 			}
@@ -90,7 +88,7 @@ void writeInstruction(SymbolTable *table, FILE **outputFile, char *firstOp, char
 		symbol = secondOp[0];
 
 		if (opCode == 0) {
-			printf("Error. Unrecognized instruction.\n");
+			printf("[%s] Error. Unrecognized instruction.\n", firstOp);
 			exit(1);
 		}
 

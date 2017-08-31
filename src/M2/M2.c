@@ -7,6 +7,7 @@
 void initM2(M2 *vm, int initMemPos) {
 	initMemory(vm->memory);
 
+	vm->initialPos = initMemPos;
 	vm->PC = initMemPos;
 	vm->AC = 0;
 }
@@ -152,7 +153,7 @@ void runProgram(M2 *vm) {
 
 			case LAI:
 				readMemory(vm->memory, &memValueAtPos, vm->RX);
-				readMemory(vm->memory, &memValueAtPos, vm->RX + memValueAtPos + 1);
+				readMemory(vm->memory, &memValueAtPos, vm->initialPos + memValueAtPos);
 
 				vm->AC = memValueAtPos;
 				vm->RX++;
@@ -163,6 +164,17 @@ void runProgram(M2 *vm) {
 				writeMemory(vm->memory, vm->AC, vm->RX + memValueAtPos + 1);
 				
 				vm->RX++;
+			break;
+			
+			case DOB:
+				readMemory(vm->memory, &memValueAtPos, pos);
+				vm->AC = (memValueAtPos << 1); // AC = 2 * memValueAtPos
+			break;
+			
+			case JPA:
+				if (vm->AC % 2 == 0) {
+					vm->PC = pos;
+				}
 			break;
 
 			default:

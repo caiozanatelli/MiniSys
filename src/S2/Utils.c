@@ -3,52 +3,53 @@
 #include <stdio.h>
 #include "Utils.h"
 
+// Reset the instruction fields
 void resetInstruction(Instruction *instruction) {
 	strcpy(instruction->firstTerm, "");
 	strcpy(instruction->secondTerm, "");
 	strcpy(instruction->thirdTerm, "");
 }
 
+// Read an instruction (there may be up to three terms)
 void readInstruction(Instruction *instr, char *instrLine) {
 	sscanf(instrLine, "%s %s %s", instr->firstTerm, instr->secondTerm, instr->thirdTerm);
 }
 
+// Print an instruction
 void printInstruction(Instruction *instruction) {
 	printf("%s %s %s\n", instruction->firstTerm, instruction->secondTerm, instruction->thirdTerm);
 }
 
+// Returns TRUE if the argument is an one-byte instruction and FALSE otherwise
 int isOneByteInstruction(char *s) {
-	if (isPseudoOperator(s)) {
-		return TRUE;
-	}
-
 	return (strcmp(s, "SAI") == 0 || strcmp(s, "LAI") == 0 || strcmp(s, "RET") == 0 || 
-			strcmp(s, "LAX") == 0 || strcmp(s, "SAX") == 0);
+			strcmp(s, "LAX") == 0 || strcmp(s, "SAX") == 0 || strcmp(s, "HLT") == 0);
 }
 
+// Returns TRUE if a given instruction is labeled and FALSE otherwise
 int isLabel(Instruction *instr) {
-	if (strlen(instr->firstTerm) && strlen(instr->secondTerm) && strlen(instr->thirdTerm)) {
+	int lenFirstTerm  = strlen(instr->firstTerm);
+	int lenSecondTerm = strlen(instr->secondTerm);
+	int lenThirdTerm  = strlen(instr->thirdTerm);
+	
+	if (lenFirstTerm && lenSecondTerm && lenThirdTerm) {
 		return TRUE;
 	}
 	
-	if (strcmp(instr->secondTerm, "SAI") == 0 || strcmp(instr->secondTerm, "LAI") == 0 ||
-		strcmp(instr->secondTerm, "RET") == 0 || strcmp(instr->secondTerm, "LAX") == 0 ||
-		strcmp(instr->secondTerm, "SAX") == 0) {
-
-		return TRUE;
-	}
-
-	return FALSE;
+	return isOneByteInstruction(instr->secondTerm);
 }
 
+// Returns TRUE if the pseudo-instruction END has been found and FALSE otherwise
 int isEndOfProgram(char *s) {
 	return (strcmp(s, "END") == 0);
 }
 
+// Returns TRUE if a pseudo-operator has been found and FALSE otherwise
 int isPseudoOperator(char *s) {
 	return (strcmp(s, "DC") == 0 || strcmp(s, "DA") == 0 || strcmp(s, "DS") == 0);
 }
 
+// Returns the opcode of a given instruction and 0 in case of an invalid one
 unsigned char getOpcode(char *instruction) {
 	if (strcmp(instruction, "LAD") == 0) {
 		return LAD;
@@ -112,6 +113,15 @@ unsigned char getOpcode(char *instruction) {
 	}
 	else if (strcmp(instruction, "SAI") == 0) {
 		return SAI;
+	}
+	else if (strcmp(instruction, "DOB") == 0) {
+		return DOB;
+	}
+	else if (strcmp(instruction, "MET") == 0) {
+		return MET;
+	}
+	else if (strcmp(instruction, "JPA") == 0) {
+		return JPA;
 	}
 
 	return 0;

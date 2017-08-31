@@ -1,0 +1,17 @@
+  INP A
+  LAD A
+  
+  JPA S
+  OUT Z
+  JMP E
+
+S OUT U
+  JMP E
+  
+E HLT
+
+A DC 0
+Z DC 0
+U DC 1
+
+  END
