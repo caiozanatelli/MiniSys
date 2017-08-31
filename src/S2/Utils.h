@@ -19,8 +19,28 @@
 #define SAX 15
 #define LCD 16
 #define JCC 17
+#define CAL 18
+#define RET 19
+#define LAI 20
+#define SAI 21
 
-int isLabel(char *s);
+#define OPERAND_SIZE 10
+
+#define TRUE  1
+#define FALSE 0
+
+typedef struct {
+	char firstTerm[OPERAND_SIZE];
+	char secondTerm[OPERAND_SIZE];
+	char thirdTerm[OPERAND_SIZE];
+} Instruction;
+
+void resetInstruction(Instruction *instruction);
+void readInstruction(Instruction *instruction, char *instructionLine);
+void printInstruction(Instruction *instruction);
+
+int isLabel(Instruction *instruction);
+int isOneByteInstruction(char *s);
 int isEndOfProgram(char *s);
 int isPseudoOperator(char *s);
 unsigned char getOpcode(char *instruction);

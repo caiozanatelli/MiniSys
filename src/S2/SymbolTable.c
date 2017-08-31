@@ -32,33 +32,28 @@ void printSymbolTable(SymbolTable *table) {
 void buildSymbolTable(SymbolTable *table, FILE **inputFile) {
 	char line[255];
 	char *reader = line;
-	char firstTerm[5];
-	char firstOperator[5];
+	
+	Instruction instruction;
 	
 	int ILC = 0;
 		
 	while (fscanf(*inputFile, "%[^\n]\n", reader) == 1) {
-		sscanf(reader, "%s", firstTerm);
-		reader = &reader[strlen(firstTerm) + 1];
+		resetInstruction(&instruction);
+		readInstruction(&instruction, reader);
 		
-		if (isLabel(firstTerm)) {
-			sscanf(reader, "%s", firstOperator);
-			reader = &reader[strlen(firstOperator) + 1];
-			
-			int symbolIndex = getSymbolPosition(firstTerm[0]);
+		if (isLabel(&instruction)) {
+			int symbolIndex = getSymbolPosition(instruction.firstTerm[0]);
 			
 			//table->size += (getTableValueAt(table, symbolIndex) == -EMPTY_SPOT);
 
 			table->data[symbolIndex] = ILC;
 			table->size++;
-			
-			if (isPseudoOperator(firstOperator)) {
-				ILC++;
-				continue;
-			}
+
+			ILC += (isPseudoOperator(instruction.secondTerm)) ? 1 : 2;
 		}
-		
-		ILC += 2;
+		else {
+			ILC += (isPseudoOperator(instruction.firstTerm)) ? 1 : 2;
+		}
 	}
 }
 
