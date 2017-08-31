@@ -73,6 +73,15 @@ void writeInstruction(SymbolTable *table, FILE **outputFile, char *firstOp, char
 			symbol = secondOp[0];
 			fprintf(*outputFile, "%d\n", getTableValueAt(table, getSymbolPosition(symbol)) - *ILC);
 		}
+		else if (strcmp(firstOp, "DS") == 0) {
+			printf("AQUIII PORRA\n\n");
+			printf("Value %d\n\n", value);
+			while (value--) {
+				fprintf(*outputFile, "%d\n", 0);
+			}
+
+			*ILC += value - 1;
+		}
 	}
 	else {
 		*ILC += 2;

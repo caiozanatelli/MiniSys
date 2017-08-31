@@ -27,8 +27,11 @@ void loadProgram(M2 *vm, char *fileDir) {
 	while (fscanf(programFile, "%d", &data) == 1) {
 		writeMemory(vm->memory, data, memPos++);
 	}
+
+	fclose(programFile);
 }
 
+// Run an M2 program
 void runProgram(M2 *vm) {
 	Word firstByte = 0, secondByte = 0;
 	int input = 0, pos = 0, memValueAtPos = 0;
