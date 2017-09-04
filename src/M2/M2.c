@@ -186,6 +186,12 @@ void runProgram(M2 *vm) {
 				vm->AC = (memValueAtPos << 1); // AC = 2 * memValueAtPos
 			break;
 			
+			// Calculate the half of a given value: AC <- (M) / 2
+			case MET:
+				readMemory(vm->memory, &memValueAtPos, pos);
+				vm-> AC = (memValueAtPos >> 1); // AC = memValueAtPos / 2
+			break;
+			
 			// Jump on even: if AC % 2 == 0 then PC <- (M)
 			case JPA:
 				if (vm->AC % 2 == 0) {
