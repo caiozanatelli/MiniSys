@@ -32,7 +32,7 @@ void loadProgram(M2 *vm, char *fileDir) {
 	fclose(programFile);
 }
 
-// Run an M2 program
+// Run an M2 program until the HLT instruction is found
 void runProgram(M2 *vm) {
 	Word firstByte = 0, secondByte = 0;
 	int input = 0, pos = 0, memValueAtPos = 0;
@@ -48,56 +48,68 @@ void runProgram(M2 *vm) {
 
 		// Identify the current instruction and execute it
 		switch (firstByte) {
+		
+			// Load AC directly: AC <- (M)
 			case LAD:
 				readMemory(vm->memory, &vm->AC, pos);
 			break;
 
+			// Store AC directly: (M) <- AC
 			case SAD:
 				writeMemory(vm->memory, vm->AC, pos);
 			break;
 
+			// Save sum to AC: AC <- AC + (M)
 			case ADD:
 				readMemory(vm->memory, &memValueAtPos, pos);
 				vm->AC += memValueAtPos;
 			break;
 
+			// Save subtraction to AC: AC <- AC - (M)
 			case SUB:
 				readMemory(vm->memory, &memValueAtPos, pos);
 				vm->AC -= memValueAtPos;
 			break;
 
+			// Read an inter: (M) <- integer read
 			case INP:
 				scanf("%d", &input);
 				writeMemory(vm->memory, input, pos);
 			break;
 
+			// Print the value of an address position: Print (M)
 			case OUT:
 				readMemory(vm->memory, &memValueAtPos, pos);
 				printf("%d\n", memValueAtPos);
 			break;
 
+			// Jump to the address given: PC <- M
 			case JMP:
 				vm->PC = pos;
 			break;
 
+			// Jump on greater than zero: if AC > 0 then PC <- M
 			case JGZ:
 				if (vm->AC > 0) {
 					vm->PC = pos;
 				}
 			break;
 
+			// Jump on less than zero: if AC < 0 then PC <- M
 			case JLZ:
 				if (vm->AC < 0) {
 					vm->PC = pos;
 				}
 			break;
 
+			// Jump on equal to zero: if AC == 0 then PC <- M
 			case JZE:
 				if (vm->AC == 0) {
 					vm->PC = pos;
 				}
 			break;
 
+			// Stop execution
 			case HLT:
 				// End of program
 			break;
@@ -151,6 +163,7 @@ void runProgram(M2 *vm) {
 				vm->PC = vm->RX;
 			break;
 
+			// Load AC indirectly: AC <- ((RX)); RX <- RX + 1
 			case LAI:
 				readMemory(vm->memory, &memValueAtPos, vm->RX);
 				readMemory(vm->memory, &memValueAtPos, vm->initialPos + memValueAtPos);
@@ -159,6 +172,7 @@ void runProgram(M2 *vm) {
 				vm->RX++;
 			break;
 
+			// Store AC indirectly: ((RX)) <- AC; RX <- RX + 1 
 			case SAI:
 				readMemory(vm->memory, &memValueAtPos, vm->RX);
 				writeMemory(vm->memory, vm->AC, vm->RX + memValueAtPos + 1);
@@ -166,17 +180,20 @@ void runProgram(M2 *vm) {
 				vm->RX++;
 			break;
 			
+			// Calculate the double of a given value: AC <- 2 * (M)
 			case DOB:
 				readMemory(vm->memory, &memValueAtPos, pos);
 				vm->AC = (memValueAtPos << 1); // AC = 2 * memValueAtPos
 			break;
 			
+			// Jump on even: if AC % 2 == 0 then PC <- (M)
 			case JPA:
 				if (vm->AC % 2 == 0) {
 					vm->PC = pos;
 				}
 			break;
-
+			
+			// Not a valid instruction. Exit program
 			default:
 				printf("Error. Unrecognized instruction.\n");
 				exit(1);
