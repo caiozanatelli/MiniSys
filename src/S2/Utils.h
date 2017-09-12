@@ -44,6 +44,7 @@ void readInstruction(Instruction *instruction, char *instructionLine);
 void printInstruction(Instruction *instruction);
 
 int isLabel(Instruction *instruction);
+int getLabelType(char *instr);
 int isOneByteInstruction(char *s);
 int isEndOfProgram(char *s);
 int isPseudoOperator(char *s);

@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "Utils.h"
+#include "SymbolTable.h"
 
 // Reset the instruction fields
 void resetInstruction(Instruction *instruction) {
@@ -37,6 +38,11 @@ int isLabel(Instruction *instr) {
 	}
 	
 	return isOneByteInstruction(instr->secondTerm);
+}
+
+// Get the label type (variable or subprogram) for a given labeled instruction
+int getLabelType(char *instr) {
+	return (strcmp(instr, "CAL") == 0 ? ID_SUBPROGRAM : ID_VARIABLE);
 }
 
 // Returns TRUE if the pseudo-instruction END has been found and FALSE otherwise

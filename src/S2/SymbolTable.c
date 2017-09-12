@@ -5,30 +5,39 @@
 #include "Utils.h"
 #include "SymbolTable.h"
 
+// Initialize the symbol table structure
 void initSymbolTable(SymbolTable *table) {
 	table->capacity = TABLE_SIZE;
-	table->data = (int*) malloc(table->capacity * sizeof(int));
+	table->data = (Label*) malloc(table->capacity * sizeof(Label));
 	table->size = 0;
 	
-	memset(table->data, EMPTY_SPOT, table->capacity * sizeof(int));
+	int i;
+	for (i = 0; i < table->capacity; i++) {
+		table->data[i].address   = EMPTY_SPOT;
+		table->data[i].labelType = EMPTY_SPOT;
+	}
 }
 
+// Deallocate the symbol table
 void freeSymbolTable(SymbolTable *table) {
 	free(table->data);
 }
 
+// Print the symbol table contents
 void printSymbolTable(SymbolTable *table) {
 	printf("--------------------\n");
 	printf(". : Symbol Table : .\n\n");
 
 	int i;	
 	for (i = 0; i < TABLE_SIZE; i++) {
-		printf("Table[%d]: %d\n", i, table->data[i]);
+		printf("Table[%d]: %d", i, table->data[i].address);
+		printf("%s\n", (table->data[i].labelType == ID_SUBPROGRAM) ? "SUB_PROGRAM" : "VARIABLE");
 	}
 	
 	printf("--------------------\n\n");
 }
 
+// Build the symbol table based on the LS2 code given by input
 void buildSymbolTable(SymbolTable *table, FILE **inputFile) {
 	char line[255];
 	char *reader = line;
@@ -46,7 +55,8 @@ void buildSymbolTable(SymbolTable *table, FILE **inputFile) {
 			
 			//table->size += (getTableValueAt(table, symbolIndex) == -EMPTY_SPOT);
 
-			table->data[symbolIndex] = ILC;
+			table->data[symbolIndex].address   = ILC;
+			table->data[symbolIndex].labelType = getLabelType(instruction.secondTerm);
 			table->size++;
 
 			ILC += (isPseudoOperator(instruction.secondTerm)) ? 1 : 2;
@@ -57,19 +67,34 @@ void buildSymbolTable(SymbolTable *table, FILE **inputFile) {
 	}
 }
 
+// Get a valid array position for a given symbol - charset [a-zA-Z]
 int getSymbolPosition(char symbol) {
 	return (isupper(symbol) ? symbol - 'A' : symbol - 'a' + 26);
 }
 
-int getTableValueAt(SymbolTable *table, int index) {
+// Get a char symbol for its integer valid position representation
+char getSymbolFromPosition(int position) {
+	return (position <= 25 ? position + 'A' : position + 'a');
+}
+
+// Get the content for a given position at the symbol table
+Label getTableValueAt(SymbolTable *table, int index) {
 	if (index < 0 || index > table->capacity) {
 		printf("Error. Invalid table index.\n");
-		return -1;
+		exit(1);
 	}
 	
 	return table->data[index];
 }
 
+// Get the number of labels present in the table
 int getTableSize(SymbolTable *table) {
 	return table->size;
 }
+
+// Verify if a label is being used in the code
+int isLabelUsed(Label *label) {
+	return (label->address != EMPTY_SPOT && label->labelType != EMPTY_SPOT);
+}
+
+
