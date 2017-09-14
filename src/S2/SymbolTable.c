@@ -96,5 +96,3 @@ int getTableSize(SymbolTable *table) {
 int isLabelUsed(Label *label) {
 	return (label->address != EMPTY_SPOT && label->labelType != EMPTY_SPOT);
 }
-
-
