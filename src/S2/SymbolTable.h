@@ -22,7 +22,7 @@ typedef struct {
 void initSymbolTable(SymbolTable *table);
 void freeSymbolTable(SymbolTable *table);
 void printSymbolTable(SymbolTable *table);
-void buildSymbolTable(SymbolTable *table, FILE **inputFile);
+int buildSymbolTable(SymbolTable *table, FILE **inputFile);
 char getSymbolFromPosition(int position);
 Label getTableValueAt(SymbolTable *table, int index);
 int getSymbolPosition(char symbol);

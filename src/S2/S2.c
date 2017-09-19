@@ -9,10 +9,10 @@ void genM2Code(FILE **inputFile, FILE **outputFile) {
 	// Build the symbol table (for labels) in the first pass
 	SymbolTable symbolTable;
 	initSymbolTable(&symbolTable);
-	buildSymbolTable(&symbolTable, inputFile);
+	int offset = buildSymbolTable(&symbolTable, inputFile);
 	
 	// Parse the S2 instructions to M2 instructions
-	buildHeader(&symbolTable, outputFile);
+	buildHeader(&symbolTable, offset, outputFile);
 	parseInstructions(&symbolTable, inputFile, outputFile);
 	
 	// Free the memory used for the symbol table
@@ -20,10 +20,13 @@ void genM2Code(FILE **inputFile, FILE **outputFile) {
 }
 
 // Build the object header to help the linker later on
-void buildHeader(SymbolTable *table, FILE **outputFile) {
+void buildHeader(SymbolTable *table, int offset, FILE **outputFile) {
 	Label label;
 	int i;
-	
+
+	// First, print the module offset for easier linking by the L2 module
+	fprintf(*outputFile, "%d\n", offset);
+
 	// For all labels in the symbol table, print it to the header if it's in use
 	for (i = 0; i < table->capacity; i++) {
 		label = getTableValueAt(table, i);

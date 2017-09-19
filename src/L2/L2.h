@@ -2,8 +2,10 @@
 #define L2_H
 
 #include "MapModules.h"
+#include "Module.h"
 
-void linkModules(FILE *modules[], FILE **output, int numModules, int initMemPos);
+void linkModules(Module *modules, int numModules, FILE **outputFile, int loadAddress);
+void genM2LinkedCode(Module *modules, MapModules *map, int numModules, FILE **out, int loadAddress);
 //void fixAbsoluteAddresses();
 //void fixReferences();
 

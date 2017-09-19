@@ -6,11 +6,11 @@
 #define TRUE			1
 #define FALSE			0
 
+#include "Module.h"
+
 typedef struct {
 	int address;
 	int fileID;
-	int isAbsolute;
-	int isSubprogram;
 } Label;
 
 typedef struct {
@@ -21,9 +21,8 @@ typedef struct {
 
 void initMap(MapModules *map);
 void freeMap(MapModules *map);
-void buildMap(MapModules *map, FILE *modules[], int numModules);
+void buildMap(MapModules *map, Module *modules, int numModules);
 void printMap(MapModules *map);
 int getSymbolPosition(char symbol);
-int getSymbolIndexFromAddress(MapModules *map, int address);
 
 #endif

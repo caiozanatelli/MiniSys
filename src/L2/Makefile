@@ -1,7 +1,8 @@
 TARGET = ./L2
 LIBS = -lm
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c99 -pedantic -g 
+#CFLAGS = -Wall -Wextra -Werror -std=c99 -pedantic -g
+CFLAGS = -Wall -std=c99 -g 
 CLEAN = rm *o
 
 .PHONY: default all clean

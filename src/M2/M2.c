@@ -29,6 +29,8 @@ void loadProgram(M2 *vm, char *fileDir) {
 		writeMemory(vm->memory, data, memPos++);
 	}
 
+	//printMemory(vm->memory);
+
 	fclose(programFile);
 }
 
@@ -45,6 +47,10 @@ void runProgram(M2 *vm) {
 
 		// Get the memory position to be read/written
 		pos = vm->PC + secondByte;
+
+		//pos = vm->PC + secondByte;
+
+		//printf("[%d %d]\n", firstByte, secondByte);
 
 		// Identify the current instruction and execute it
 		switch (firstByte) {
@@ -166,7 +172,8 @@ void runProgram(M2 *vm) {
 			// Load AC indirectly: AC <- ((RX)); RX <- RX + 1
 			case LAI:
 				readMemory(vm->memory, &memValueAtPos, vm->RX);
-				readMemory(vm->memory, &memValueAtPos, vm->initialPos + memValueAtPos);
+				readMemory(vm->memory, &memValueAtPos, memValueAtPos);
+				//readMemory(vm->memory, &memValueAtPos, vm->initialPos + memValueAtPos);
 
 				vm->AC = memValueAtPos;
 				vm->RX++;
@@ -175,7 +182,8 @@ void runProgram(M2 *vm) {
 			// Store AC indirectly: ((RX)) <- AC; RX <- RX + 1 
 			case SAI:
 				readMemory(vm->memory, &memValueAtPos, vm->RX);
-				writeMemory(vm->memory, vm->AC, vm->RX + memValueAtPos + 1);
+				writeMemory(vm->memory, vm->AC, memValueAtPos);
+				//writeMemory(vm->memory, vm->AC, vm->RX + memValueAtPos + 1);
 				
 				vm->RX++;
 			break;
@@ -207,5 +215,7 @@ void runProgram(M2 *vm) {
 		}
 
 	} while (firstByte != HLT);
+
+	//printMemory(vm->memory);
 
 }

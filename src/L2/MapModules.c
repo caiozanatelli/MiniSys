@@ -14,8 +14,6 @@ void initMap(MapModules *map) {
 	for (i = 0; i < map->capacity; i++) {
 		map->data[i].address      = EMPTY_SPOT;
 		map->data[i].fileID       = EMPTY_SPOT;
-		map->data[i].isAbsolute   = EMPTY_SPOT;
-		map->data[i].isSubprogram = EMPTY_SPOT;
 	}
 }
 
@@ -25,21 +23,29 @@ void freeMap(MapModules *map) {
 }
 
 // Build the modules mapping in order to link them
-void buildMap(MapModules *map, FILE *modules[], int numModules) {
+void buildMap(MapModules *map, Module *modules, int numModules) {
 	int i;
 	int isLabel;
 	int label;
 	int labelAddress;
-	int absoluteAddr;
+	int offset;
 	
 	char word[15];
+
+	modules[0].linkOffset = 0;
 	
 	// Read the header of each file and build the modules map
 	for (i = 0; i < numModules; i++) {
-		isLabel = 1;		
-		
+		// First read the module offset which was set by the assembler (M2)
+		fscanf(modules[i].fpCode, "%d", &offset);
+
+		if (i != numModules - 1) {
+			modules[i + 1].linkOffset = modules[i].linkOffset + offset;
+		}
+
 		// Process header searching for labels addresses
-		while (fscanf(modules[i], "%s", word) == 1 && strcmp(word, "#") != 0) {
+		isLabel = 1;		
+		while (fscanf(modules[i].fpCode, "%s", word) == 1 && strcmp(word, "#") != 0) {
 			if (isLabel) {
 				label = getSymbolPosition(word[0]);
 			}
@@ -48,41 +54,10 @@ void buildMap(MapModules *map, FILE *modules[], int numModules) {
 				
 				map->data[label].address = labelAddress;
 				map->data[label].fileID  = i;
-				//map->data[label].isSubprogram = 0;
-				//map->data[label].isAbsolute = 0;
 			}
 			
 			isLabel = !isLabel;
 		}
-		
-		// Process the code int order to find absolute addresses and func calls
-		while (fscanf(modules[i], "%s", word) == 1) {
-			if (word[0] == '!') { // This is a call to a subprogram
-				if (fscanf(modules[i], "%s", word) != 1) {
-					continue;
-				}
-								
-				label = getSymbolPosition(word[0]);
-				map->data[label].isSubprogram = TRUE;
-				map->data[label].isAbsolute   = FALSE;
-			}
-			else if (word[0] == '*') {
-				if (fscanf(modules[i], "%d", &absoluteAddr) != 1) {
-					continue;
-				}
-				
-				label = getSymbolIndexFromAddress(map, absoluteAddr);
-				
-				if (label < 0) {
-					printf("Error. Absolute addres not valid.\n");
-					exit(1);
-				}
-				
-				map->data[label].isSubprogram = FALSE;
-				map->data[label].isAbsolute   = TRUE;
-			}
-		}
-		
 	}
 }
 
@@ -94,8 +69,7 @@ void printMap(MapModules *map) {
 	int i;	
 	for (i = 0; i < MAP_SIZE; i++) {
 		printf("Map[%d]: %d\t", i, map->data[i].address);
-		printf("File ID: %d\tAbsolute Addr: %d", map->data[i].fileID, map->data[i].isAbsolute);
-		printf("\tSubprogram: %d\n", map->data[i].isSubprogram);
+		printf("File ID: %d\n", map->data[i].fileID);
 	}
 	
 	printf("----------------------------------------------------------------------\n");
@@ -104,16 +78,5 @@ void printMap(MapModules *map) {
 // Get a valid array position for a given symbol - charset [a-zA-Z]
 int getSymbolPosition(char symbol) {
 	return (isupper(symbol) ? symbol - 'A' : symbol - 'a' + 26);
-}
-
-int getSymbolIndexFromAddress(MapModules *map, int address) {
-	int i;
-	for (i = 0; i < map->capacity; i++) {
-		if (map->data[i].address == address) {
-			return i; 
-		}
-	}
-	
-	return -1;
 }
 

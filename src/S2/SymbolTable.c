@@ -37,19 +37,25 @@ void printSymbolTable(SymbolTable *table) {
 	printf("--------------------\n\n");
 }
 
-// Build the symbol table based on the LS2 code given by input
-void buildSymbolTable(SymbolTable *table, FILE **inputFile) {
+// Build the symbol table based on the LS2 code given by input and return the module offset
+int buildSymbolTable(SymbolTable *table, FILE **inputFile) {
 	char line[255];
 	char *reader = line;
 	
 	Instruction instruction;
 	
 	int ILC = 0;
+	int ILCIncrement = 0;
 		
-	while (fscanf(*inputFile, "%[^\n]\n", reader) == 1) {
+	// Read all the lines (instructions) of the file
+	while (fscanf(*inputFile, "%[^\n]\n", reader) == 1){
 		resetInstruction(&instruction);
 		readInstruction(&instruction, reader);
 		
+		if (isEndOfProgram(instruction.firstTerm)) {
+			break;
+		}
+
 		if (isLabel(&instruction)) {
 			int symbolIndex = getSymbolPosition(instruction.firstTerm[0]);
 			
@@ -59,12 +65,16 @@ void buildSymbolTable(SymbolTable *table, FILE **inputFile) {
 			table->data[symbolIndex].labelType = getLabelType(instruction.secondTerm);
 			table->size++;
 
-			ILC += (isPseudoOperator(instruction.secondTerm)) ? 1 : 2;
+			ILCIncrement = (isPseudoOperator(instruction.secondTerm)) ? 1 : 2;
 		}
 		else {
-			ILC += (isPseudoOperator(instruction.firstTerm)) ? 1 : 2;
+			ILCIncrement = (isPseudoOperator(instruction.firstTerm)) ? 1 : 2;
 		}
+
+		ILC += ILCIncrement;
 	}
+
+	return ILC - ILCIncrement + 1;
 }
 
 // Get a valid array position for a given symbol - charset [a-zA-Z]
