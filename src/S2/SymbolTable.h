@@ -1,7 +1,7 @@
 #ifndef SYMBOL_TABLE_H
 #define SYMBOL_TABLE_H
 
-#define TABLE_SIZE      52
+#define TABLE_SIZE      256
 #define EMPTY_SPOT      -1
 #define ID_SUBPROGRAM   0
 #define ID_VARIABLE     1

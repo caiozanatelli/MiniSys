@@ -56,7 +56,6 @@ void parseInstructions(SymbolTable *table, FILE **inputFile, FILE **outputFile) 
 	while (fscanf(*inputFile, "%[^\n]\n", reader) == 1) {
 		resetInstruction(&instruction);
 		readInstruction(&instruction, reader);
-		//printInstruction(&instruction);
 
 		sscanf(instruction.thirdTerm, "%d", &value);
 
@@ -82,7 +81,7 @@ void parseInstructions(SymbolTable *table, FILE **inputFile, FILE **outputFile) 
 void writeInstruction(SymbolTable *table, FILE **outputFile, char *firstOp, char *secondOp, int value, int *ILC) {
 	char symbol = 0;
 	unsigned char opCode = 0;
-	unsigned int symbolLocation = 0;
+	int symbolLocation = 0;
 	Label label;
 
 	// It's a pseudo-instruction, so the treatment must be different
@@ -91,7 +90,7 @@ void writeInstruction(SymbolTable *table, FILE **outputFile, char *firstOp, char
 
 		// Define Constant (DC) given by the code
 		if (strcmp(firstOp, "DC") == 0) {
-			fprintf(*outputFile, "%d\n", value);
+			fprintf(*outputFile, "& %d\n", value);
 		}
 		// Define Address (DA), that is, the absolute address of a label/parameter. 
 		else if (strcmp(firstOp, "DA") == 0) {
@@ -133,14 +132,14 @@ void writeInstruction(SymbolTable *table, FILE **outputFile, char *firstOp, char
 		// Add subprogram reference identification for the linker
 		if (opCode == CAL) {
 			if (isLabelUsed(&label)) {
-				fprintf(*outputFile, "! %02u\n", symbolLocation);
+				fprintf(*outputFile, "! %02d\n", symbolLocation);
 			}
 			else {
 				fprintf(*outputFile, "! %c\n", symbol);
 			}
 		}
 		else {
-			fprintf(*outputFile, "%02u %02u\n", opCode, symbolLocation);
+			fprintf(*outputFile, "%02d %02d\n", opCode, symbolLocation);
 		}
 	}
 

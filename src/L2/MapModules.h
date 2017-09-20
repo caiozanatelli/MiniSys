@@ -1,7 +1,7 @@
 #ifndef MAP_MODULES_H
 #define MAP_MODULES_H
 
-#define MAP_SIZE		52
+#define MAP_SIZE		256
 #define EMPTY_SPOT		-1
 #define TRUE			1
 #define FALSE			0

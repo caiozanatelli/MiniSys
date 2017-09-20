@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
 		exit(1);
 	}
 
-	int loadAddress;
+	int loadAddress = 0;
 	sscanf(argv[argc - 1], "%d", &loadAddress);
 	
 	linkModules(modules, numModules, &outputFile, loadAddress);

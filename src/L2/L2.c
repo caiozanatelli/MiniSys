@@ -60,9 +60,13 @@ void genM2LinkedCode(Module *modules, MapModules *map, int numModules, FILE **ou
 				fprintf(*out, "%d\n", addr);
 			}
 			// Treatment for a DC pseudo operator
-			else if (strcmp(word, "0") == 0) {
+			else if (word[0] == '&') {
 				PC += 1;
-				fprintf(*out, "%s\n", word);
+				if (fscanf(modules[i].fpCode, "%d", &addr) != 1) {
+					printf("Error. Bad instruction. \n");
+					exit(1);
+				}
+				fprintf(*out, "%d\n", addr);
 			}
 			// Treatment for any other type of instruction
 			else {

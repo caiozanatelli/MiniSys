@@ -79,12 +79,12 @@ int buildSymbolTable(SymbolTable *table, FILE **inputFile) {
 
 // Get a valid array position for a given symbol - charset [a-zA-Z]
 int getSymbolPosition(char symbol) {
-	return (isupper(symbol) ? symbol - 'A' : symbol - 'a' + 26);
+	return (int) symbol;
 }
 
 // Get a char symbol for its integer valid position representation
 char getSymbolFromPosition(int position) {
-	return (position <= 25 ? position + 'A' : position + 'a');
+	return (char) position;
 }
 
 // Get the content for a given position at the symbol table

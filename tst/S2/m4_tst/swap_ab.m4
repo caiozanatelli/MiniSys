@@ -1,17 +1,17 @@
 include(library.m4)
 program
 int(A, 0)
-int(B, 1)
-int(C, 2)
+int(B, 0)
+int(C, 0)
 begin
 ler(A)
 ler(B)
-se(A, menor, B)
-escrever(A)
-end_se
-se(A, maior, B)
-escrever(B)
-end_se
+lad(A)
+sad(C)
+lad(B)
+sad(A)
+lad(C)
+sad(B)
 escrever(A)
 escrever(B)
 end

@@ -77,6 +77,6 @@ void printMap(MapModules *map) {
 
 // Get a valid array position for a given symbol - charset [a-zA-Z]
 int getSymbolPosition(char symbol) {
-	return (isupper(symbol) ? symbol - 'A' : symbol - 'a' + 26);
+	return (int) symbol;
 }
 
