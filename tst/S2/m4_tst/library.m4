@@ -1,3 +1,4 @@
+dnl
 define(`lad', `LAD $1')dnl
 define(`sad', `SAD $1')dnl
 define(`add', `ADD $1')dnl
@@ -51,6 +52,7 @@ dnl
 define(`program', `JMP LBL_PROG
 z DC 0
 u DC 1')dnl
+dnl
 define(`begin', `LBL_PROG builtin(`popdef', `LBL_PROG')dnl')dnl
 dnl
 dnl
@@ -97,15 +99,29 @@ dnl
 dnl
 define(`para', `JMP LBL_JMP
 dnl
-LBL_FOR DC $3 
-pushdef(`LBL_FOR_ARG', `LBL_FOR') builtin(`popdef', `LBL_FOR')
-LBL_FOR DC $2 builtin(`popdef', `LBL_FOR')
-pushdef(`LBL_FOR_ARG', `LBL_FOR') builtin(`popdef', `LBL_FOR')
+LBL_FOR DC $3 dnl
+pushdef(`LBL_FOR_ARG', defn(`LBL_FOR'))dnl
+popdef(`LBL_FOR')
 dnl
+LBL_FOR DC $2 dnl
+pushdef(`LBL_FOR_ARG', defn(`LBL_FOR'))dnl
+popdef(`LBL_FOR')
 dnl
-LBL_JMP builtin(`popdef', `LBL_JMP')dnl
-LAD LBL_FOR_ARG builtin(`popdef', `FOR_LBL_ARG')
+LBL_JMP popdef(`LBL_JMP')dnl
+LAD LBL_FOR_ARG
 SAD $1
+popdef(`LBL_JMP')dnl
+LBL_JMP dnl
+popdef(`LBL_FOR_ARG')dnl
+SUB LBL_FOR_ARG
+pushdef(`JMP_BACK_TO_LOOP', defn(`LBL_JMP'))dnl
+popdef(`LBL_JMP')dnl
+JGZ LBL_JMP
+LAD $1
+ADD u
+SAD $1
+JMP JMP_BACK_TO_LOOP dnl
 ')dnl
 dnl
-define(`end_para', `LBL_JMP builtin(`popdef', `LBL_JMP')dnl')dnl
+define(`end_para', `LBL_JMP dnl
+popdef(`LBL_JMP')dnl')dnl

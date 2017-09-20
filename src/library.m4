@@ -97,15 +97,22 @@ dnl
 dnl
 define(`para', `JMP LBL_JMP
 dnl
-LBL_FOR DC $3 
-pushdef(`LBL_FOR_ARG', `LBL_FOR') builtin(`popdef', `LBL_FOR')
-LBL_FOR DC $2 builtin(`popdef', `LBL_FOR')
-pushdef(`LBL_FOR_ARG', `LBL_FOR') builtin(`popdef', `LBL_FOR')
+LBL_FOR DC $3 dnl
+pushdef(`LBL_FOR_ARG', defn(`LBL_FOR'))dnl
+popdef(`LBL_FOR')
 dnl
+LBL_FOR DC $2 dnl
+pushdef(`LBL_FOR_ARG', defn(`LBL_FOR'))dnl
+popdef(`LBL_FOR')
 dnl
 LBL_JMP builtin(`popdef', `LBL_JMP')dnl
-LAD LBL_FOR_ARG builtin(`popdef', `FOR_LBL_ARG')
+LAD LBL_FOR_ARG
 SAD $1
+popdef(`LBL_FOR_ARG')dnl
+SUB LBL_FOR_ARG
+JGE LBL_JMP
+ADD u
+SAD $1 dnl
 ')dnl
 dnl
 define(`end_para', `LBL_JMP builtin(`popdef', `LBL_JMP')dnl')dnl
