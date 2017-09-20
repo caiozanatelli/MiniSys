@@ -1,34 +1,3 @@
-define(`ler', `INP $1')
-define(`escrever', `OUT $1')
-
-define(`program', `')
-define(`begin', `')
-
-define(`int', `builtin(`pushdef', `DC_VAR', `$1 DC $2')')dnl
-
-define(`end', `HLT
-f(`DC_VAR')')
-
-define(`end_program', `END')
-define(`end_se', `LBL_JMP builtin(`popdef', `LBL_JMP')dnl')dnl
-
-define(`se', `LAD $1
-SUB $3
-ifelse(
-	`$2', `menor', `JGZ LBL_JMP 
-JZE LBL_JMP',
-	`$2', `menor_igual', `JGZ LBL_JMP',
-	`$2', `maior', `JLZ LBL_JMP
-JZE LBL_JMP',
-	`$2', `maior_igual', `JLZ LBL_JMP',
-	`$2', `igual', `JZE LBL_JMP'
-)
-')dnl
-
-pushdef(`LBL_JMP', `Z')dnl
-pushdef(`LBL_JMP', `Y')dnl
-pushdef(`LBL_JMP', `X')dnl
-
 define(`lad', `LAD $1')
 define(`sad', `SAD $1')
 define(`add', `ADD $1')
@@ -47,4 +16,29 @@ define(`cal', `CAL $1')
 define(`return', `RET')
 define(`lai', `LAI')
 define(`sai', `SAI')
-
+pushdef(`LBL_PROG', `a')
+pushdef(`LBL_JMP', `w')
+pushdef(`LBL_JMP', `z')
+pushdef(`LBL_JMP', `y')
+pushdef(`LBL_JMP', `x')
+pushdef(`LBL_JMP', `v')
+pushdef(`LBL_JMP', `u')
+pushdef(`LBL_JMP', `t')
+pushdef(`LBL_JMP', `s')
+pushdef(`LBL_JMP', `r')
+pushdef(`LBL_JMP', `q')
+define(`program', `JMP LBL_PROG')
+define(`begin', `LBL_PROG builtin(`popdef', `LBL_PROG')dnl')
+define(`ler', `INP $1')
+define(`escrever', `OUT $1')
+define(`int', `$1 DC $2')
+define(`end', `HLT')
+define(`end_program', `END')
+define(`end_se', `LBL_JMP builtin(`popdef', `LBL_JMP')dnl')
+define(`se', `LAD $1
+SUB $3 
+ifelse(`$2', `menor', `JGZ LBL_JMP 
+JZE LBL_JMP', `$2', `menor_igual', `JGZ LBL_JMP',
+	`$2', `maior', `JLZ LBL_JMP
+JZE LBL_JMP', `$2', `maior_igual', `JLZ LBL_JMP',
+	`$2', `igual', `JZE LBL_JMP')')
