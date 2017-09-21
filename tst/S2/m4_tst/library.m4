@@ -24,15 +24,17 @@ dnl
 dnl
 dnl
 pushdef(`LBL_JMP', `w')dnl
-pushdef(`LBL_JMP', `z')dnl
 pushdef(`LBL_JMP', `y')dnl
 pushdef(`LBL_JMP', `x')dnl
 pushdef(`LBL_JMP', `v')dnl
-pushdef(`LBL_JMP', `u')dnl
 pushdef(`LBL_JMP', `t')dnl
 pushdef(`LBL_JMP', `s')dnl
 pushdef(`LBL_JMP', `r')dnl
 pushdef(`LBL_JMP', `q')dnl
+pushdef(`LBL_JMP', `p')dnl
+pushdef(`LBL_JMP', `o')dnl
+pushdef(`LBL_JMP', `n')dnl
+pushdef(`LBL_JMP', `m')dnl
 dnl
 pushdef(`LBL_FOR', `l')dnl
 pushdef(`LBL_FOR', `k')dnl
