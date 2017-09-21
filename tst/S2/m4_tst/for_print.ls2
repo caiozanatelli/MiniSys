@@ -1,0 +1,19 @@
+JMP a
+z DC 0
+u DC 1
+A DC 0
+a JMP q
+b DC 10 
+c DC 1 
+q LAD c
+SUB u
+SAD A
+s SUB b
+JZE t
+LAD A
+ADD u
+SAD A 
+OUT A
+JMP s
+t HLT
+END

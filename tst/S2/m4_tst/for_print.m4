@@ -1,4 +1,4 @@
-include(library.m4)
+include(library.m4)dnl
 program
 int(A, 0)
 begin

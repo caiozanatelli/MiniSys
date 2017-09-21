@@ -1,4 +1,3 @@
-dnl
 define(`lad', `LAD $1')dnl
 define(`sad', `SAD $1')dnl
 define(`add', `ADD $1')dnl
@@ -109,6 +108,7 @@ popdef(`LBL_FOR')
 dnl
 LBL_JMP popdef(`LBL_JMP')dnl
 LAD LBL_FOR_ARG
+SUB u
 SAD $1
 popdef(`LBL_JMP')dnl
 LBL_JMP dnl
@@ -116,12 +116,12 @@ popdef(`LBL_FOR_ARG')dnl
 SUB LBL_FOR_ARG
 pushdef(`JMP_BACK_TO_LOOP', defn(`LBL_JMP'))dnl
 popdef(`LBL_JMP')dnl
-JGZ LBL_JMP
+JZE LBL_JMP
 LAD $1
 ADD u
-SAD $1
-JMP JMP_BACK_TO_LOOP dnl
+SAD $1 dnl
 ')dnl
 dnl
-define(`end_para', `LBL_JMP dnl
+define(`end_para', `JMP JMP_BACK_TO_LOOP
+LBL_JMP dnl
 popdef(`LBL_JMP')dnl')dnl
