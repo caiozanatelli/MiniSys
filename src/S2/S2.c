@@ -78,6 +78,7 @@ void parseInstructions(SymbolTable *table, FILE **inputFile, FILE **outputFile) 
 
 }
 
+// Write assemble instruction into output file
 void writeInstruction(SymbolTable *table, FILE **outputFile, char *firstOp, char *secondOp, int value, int *ILC) {
 	char symbol = 0;
 	unsigned char opCode = 0;
@@ -130,13 +131,8 @@ void writeInstruction(SymbolTable *table, FILE **outputFile, char *firstOp, char
 		}
 
 		// Add subprogram reference identification for the linker
-		if (opCode == CAL) {
-			if (isLabelUsed(&label)) {
-				fprintf(*outputFile, "! %02d\n", symbolLocation);
-			}
-			else {
-				fprintf(*outputFile, "! %c\n", symbol);
-			}
+		if (opCode == CAL && !isLabelUsed(&label)) {
+			fprintf(*outputFile, "! %c\n", symbol);
 		}
 		else {
 			fprintf(*outputFile, "%02d %02d\n", opCode, symbolLocation);

@@ -1,0 +1,31 @@
+S LAI
+  SAD W
+  SAD C
+  LAI
+  SAD V
+L LAD V
+  SUB C
+  JLZ F
+  LAD C
+I SUB V
+  JZE Y
+  JGZ Y
+  DOB C
+  JMP I
+Y LAD C
+  SUB V
+  JZE Z
+  JLZ Z
+  MET C
+Z LAD V
+  SUB C
+  SAD V
+  LAD W
+  LAD W
+  SAD C
+  JMP L
+F OUT V
+  RET
+C DC 0
+V DC 0
+W DC 0

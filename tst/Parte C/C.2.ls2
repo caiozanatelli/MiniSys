@@ -1,0 +1,11 @@
+  INP K
+  INP N
+  LAD C
+  LCD N
+  LXD K
+  L SAX
+  JCC L
+  HLT
+C DC 0
+K DC 0
+N DC 0

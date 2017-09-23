@@ -29,8 +29,6 @@ void loadProgram(M2 *vm, char *fileDir) {
 		writeMemory(vm->memory, data, memPos++);
 	}
 
-	//printMemory(vm->memory);
-
 	fclose(programFile);
 }
 
@@ -47,10 +45,8 @@ void runProgram(M2 *vm) {
 
 		// Get the memory position to be read/written
 		pos = vm->PC + secondByte;
-
-		//pos = vm->PC + secondByte;
-
-		//printf("[%d %d]\n", firstByte, secondByte);
+		
+		//printf("[%d %d]\n", firstByte, secondByte); // debug-off
 
 		// Identify the current instruction and execute it
 		switch (firstByte) {
@@ -192,12 +188,14 @@ void runProgram(M2 *vm) {
 			case DOB:
 				readMemory(vm->memory, &memValueAtPos, pos);
 				vm->AC = (memValueAtPos << 1); // AC = 2 * memValueAtPos
+				writeMemory(vm->memory, vm->AC, pos);
 			break;
 			
 			// Calculate the half of a given value: AC <- (M) / 2
 			case MET:
 				readMemory(vm->memory, &memValueAtPos, pos);
 				vm-> AC = (memValueAtPos >> 1); // AC = memValueAtPos / 2
+				writeMemory(vm->memory, vm->AC, pos);				
 			break;
 			
 			// Jump on even: if AC % 2 == 0 then PC <- (M)

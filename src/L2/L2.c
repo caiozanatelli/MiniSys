@@ -43,6 +43,12 @@ void genM2LinkedCode(Module *modules, MapModules *map, int numModules, FILE **ou
 				label = getSymbolPosition(word[0]);
 
 				addr = map->data[label].address;
+
+				// Debug
+				/*printf("! %c: addr %d\n", label, addr);
+				printf("link offset: %d\n", modules[map->data[label].fileID].linkOffset);
+				printf("PC: %d\n\n", PC); */
+
 				addr += modules[map->data[label].fileID].linkOffset - PC;
 
 				fprintf(*out, "18 %d\n", addr);

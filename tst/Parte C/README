@@ -1,0 +1,24 @@
+*************************************************************************************************
+*         DESCRIÇÃO DOS TESTES DESENVOLVIDOS DE ACORDO COM A ESPECIFICAÇÃO P/ A PARTE C         *
+*                            REPETIÇÃO E ENDEREÇAMENTO INDEXADO                                 *
+*************************************************************************************************
+
+	- C1. Foram feitas as devidas alterações no montador e no simulador para aceitar repetição e
+	endereçamento indexado, nos padrões definidos pela especificação.
+		
+	- C.2 Foi escrito um  programa em LS2 para  zerar um conjunto de n posições. O programa recebe
+	dois parâmetros K e N, indicando, respectivamente, qual  posição da memória o usuário deseja e
+	quantas  posições a  partir dessa serão  zeradas. Vale  ressaltar que o  simulador M2 tem  sua 
+	memória toda inicializada com 0 pelo carregador (default) antes do código ser carregado. Assim,
+	para  melhor visualização, pode ser  uma boa  ideia inicializar com um valor  diferente de 0 e
+	printar a  memória. Os código LS2, assim como o código objeto gerado pelo montador e o  código 
+	.m2 final gerado pelo linker são apresentados neste diretório.
+	
+		*** OBS.1: A ENTRADA DO SIMULADOR (M2) É A SAÍDA DO LINKER (L2).
+		*** OBS.2: A ENTRADA DO LINKER (L2) É A SAÍDA DO MONTADOR (S2).
+		*** OBS.3: A ENTRADA DO MONTADOR (L2) É O ARQUIVO LS2.
+				
+*************************************************************************************************
+
+	
+		

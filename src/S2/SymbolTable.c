@@ -74,7 +74,7 @@ int buildSymbolTable(SymbolTable *table, FILE **inputFile) {
 		ILC += ILCIncrement;
 	}
 
-	return ILC - ILCIncrement + 1;
+	return ILC;
 }
 
 // Get a valid array position for a given symbol - charset [a-zA-Z]

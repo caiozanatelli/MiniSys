@@ -1,0 +1,18 @@
+JMP a
+z DC 0
+u DC 1
+A DC 0
+B DC 1
+a INP A
+INP B
+LAD A
+SUB B 
+JLZ m
+OUT A
+m LAD A
+SUB B 
+JGZ n 
+JZE n
+OUT B
+n HLT
+END
