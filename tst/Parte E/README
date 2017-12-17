@@ -3,18 +3,18 @@
 *                                     PROCESSADOR DE MACROS                                       *
 ***************************************************************************************************
 
-	- E.1 Foram definidas as macros INC(x), DEC(x) e CLR(x), para  incrementar, decrementar e zerar 
-	o valor de uma variável, respectivamente.
+- E.1 Foram definidas as  macros INC(x), DEC(x) e CLR(x), para  incrementar, decrementar e  zerar 
+  o valor de uma variável, respectivamente.
 		
-	- E.2 Foi escrito um programa em LS2, usando as macro acima, para ler pares de números inteiros
-	positivos  e calcular o quociente da divisão  do primeiro número  pelo segundo. O programa  foi
-	trazuzido e executado.
+- E.2 Foi escrito um programa em  LS2, usando as macro acima, para  ler pares de números inteiros
+  positivos  e calcular o quociente da divisão  do primeiro número  pelo segundo. O programa  foi
+  trazuzido e executado.
 	
-	- E.3 Foi utilizado um macro processador (GNU M4) para traduzir programas escritos em  pseudo -
-	linguagem estilo C para a linguagem de montagem da máquina M2. A linguagem contém as   palavras 
-	chaves: ler, escrever, inc, dec, clr, menor, igual, maior, menor_igual, maior_igual, begin, end, 
-	end_programa, soma, sub, se maior,  se menor, se igual, se menor igualm se  maior igual, end_se, 
-	para e end_para.
+- E.3 Foi  utilizado um macro  processador (GNU M4) para  traduzir  programas escritos em  pseudo
+  linguagem estilo C para a linguagem de montagem da máquina M2. A linguagem contém as   palavras 
+  chaves: ler, escrever, inc, dec, clr, menor, igual, maior, menor_igual, maior_igual, begin, end, 
+  end_programa, soma, sub, se maior,  se menor, se igual, se menor igualm se  maior igual, end_se, 
+  para e end_para.
 	
 		*** OBS.1: AS DEFINIÇÕES DAS MACROS ESTÃO NO ARQUIVO "./library.m4"
 		*** OBS.2: TODAS AS MACROS FORAM DEFINIDAS COM LETRAS MINÚSCULAS (M4 É CASE-SENSITIVE)

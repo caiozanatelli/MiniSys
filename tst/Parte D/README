@@ -3,14 +3,14 @@
 *                                           SUBPROGRAMAS                                        *
 *************************************************************************************************
 
-	- D.1 Foi traduzido e executado o programa (mostrado na especificação), que implementa a 
-	função dobro(x). O código LS2, assim como o código objeto gerado pelo montador e o código .m2
-	final gerado pelo linker são apresentados no diretório "./D.1".
+- D.1 Foi traduzido e executado o programa (mostrado na especificação), que implementa a função 
+  dobro(x). O código LS2, assim como o código objeto gerado pelo montador  e o código .m2 final 
+  gerado pelo linker são apresentados no diretório "./D.1".
 		
-	- D.2 Foi escrito um subprograma p/ calcular o resto da divisão de um número inteiro positivo
-	por outro  inteiro positivo, e um  programa  que utiliza este  subprograma. Então o  programa 
-	resultante foi  traduzido e executado. Os códigos LS2, assim  como os códigos  objeto gerados 
-	pelo montador e o código .m2 final gerado pelo  linker são apresentados no diretório "./D.2".
+- D.2 Foi escrito um subprograma para calcular o resto da divisão de um número inteiro positivo
+  por outro  inteiro positivo, e um  programa  que utiliza este  subprograma. Então o  programa 
+  resultante foi  traduzido e executado. Os códigos LS2, assim  como os códigos  objeto gerados 
+  pelo montador e o código .m2 final gerado pelo  linker são apresentados no diretório "./D.2".
 	
 		*** OBS.1: A ENTRADA DO SIMULADOR (M2) É A SAÍDA DO LINKER (L2).
 		*** OBS.2: A ENTRADA DO LINKER (L2) É A SAÍDA DO MONTADOR (S2).

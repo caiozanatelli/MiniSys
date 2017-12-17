@@ -2,20 +2,20 @@
 * Descrição dos testes desenvolvidos, de acordo com a especificação p/ a Parte A (Simulador M2) *
 *************************************************************************************************
 
-	- A.1: Foi  implementado um  programa (interpretador) que simula  a máquina M2, ou seja,  que 
-	executa programas  em linguagem de  máquina  de M2. Para  tanto, o  programa  é carregado  na 
-	memória  M2, sendo  o PC  inicializado  com o  endereço da primeira  instrução executável.  O 
-	código deste simulador se econtra em ../../src/M2.
+- A.1: Foi  implementado um programa (interpretador) que simula  a máquina M2, ou seja, que 
+  executa programas em linguagem de  máquina de M2. Para tanto, o  programa  é carregado na 
+  memória  M2, sendo  o PC  inicializado  com o  endereço da primeira  instrução executável.  
+  O código deste simulador se econtra em ../../src/M2.
 		
-	- A.2 Foi implementado um programa (carregador C2) que, dado um arquivo  contendo um programa
-	em linguagem de  máquina de M2  e o endereço de carga, carregua o programa na memória de M2 e 
-	inicializa  PC. O código  deste  carregador está  localizado, juntamente com o  simulador, em
-	../../src/M2 (se  trata da função "loadProgram()", definida no header M2.h e  implementada no 
-	arquivo	M2.c).
+- A.2 Foi implementado um programa (carregador C2) que, dado um arquivo contendo um programa
+  em linguagem de máquina de M2  e o endereço de carga, carregua o programa na memória de M2 
+  e inicializa  PC. O código  deste carregador está  localizado, juntamente com o  simulador, 
+  em ../../src/M2 (se trata da função "loadProgram()", definida no header M2.h e implementada 
+  no arquivo M2.c).
 		
-	- A.3 O simulador foi  testado com o seguinte programa que lê dois números e imprime o  menor
-	deles. O código  LS2, assim  como  o código objeto (L2) e  o "executável" (M2) resultantes da
-	saída do montador (S2), linker (L2) são apresentados neste diretório. 
+- A.3 O simulador foi  testado com o seguinte programa que lê dois números e imprime o  menor
+  deles. O código LS2, assim  como o código objeto (L2) e  o "executável" (M2) resultantes da
+  saída do montador (S2), linker (L2) são apresentados neste diretório. 
 	
 		*** OBS.1: A ENTRADA DO SIMULADOR (M2) É A SAÍDA DO LINKER (L2).
 		*** OBS.2: A ENTRADA DO LINKER (L2) É A SAÍDA DO MONTADOR (S2).

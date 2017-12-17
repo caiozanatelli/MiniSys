@@ -3,15 +3,15 @@
 *                                     EDITOR DE LIGAÇÃO                                         *
 *************************************************************************************************
 
-	- F.1 O programa tradutor S2 foi alterado de forma a gerar informações para relocação e ligação 
-	de programas. Para  tanto, foi incluído  um cabeçalho antes do código m2, separado  por #. Mais 
-	detalhes estão na documentação.
+- F.1 O programa  tradutor S2 foi  alterado de forma a gerar informações para relocação e ligação 
+  de programas. Para  tanto, foi incluído  um cabeçalho antes do código m2, separado  por #. Mais 
+  detalhes estão na documentação.
 		
-	- F.2 Foi implementado um editor de ligação (L2) que combina módulos objeto relocáveis em um
-	único módulo executável. Este módulo (linker) está localizado em "src/L2".
+- F.2 Foi  implementado um  editor de ligação (L2) que combina  módulos  objeto relocáveis em  um
+ único módulo executável. Este módulo (linker) está localizado em "src/L2".
 	
-	- F.3 O programa do item D.2 foi reescrito em módulos separados, traduzir, ligado e executado. Os
-	testes foram realizados para diferentes endereços de carga (0, 77, 588 e 791).
+- F.3 O programa do item D.2 foi reescrito em módulos separados, traduzir, ligado e executado. Os
+  testes foram realizados para diferentes endereços de carga (0, 77, 588 e 791).
 	
 		*** OBS.1: A ENTRADA DO SIMULADOR (M2) É A SAÍDA DO LINKER (L2).
 		*** OBS.2: A ENTRADA DO LINKER (L2) É A SAÍDA DO MONTADOR (S2).

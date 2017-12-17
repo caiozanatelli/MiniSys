@@ -2,20 +2,20 @@
 * Descrição dos testes desenvolvidos, de acordo com a especificação p/ a Parte B (Montador S2) *
 *************************************************************************************************
 
-	- B.1 Foi Implementado um programa (S2) que traduz um programa na linguagem simbólica LS2 p/
-	a linguagem de máquina LM2. Vale ressaltar que a saída deste módulo é um código objeto  p/ o
-	módulo de ligação. O código deste montador está localizado em "../../src/S2".
+- B.1 Foi Implementado um programa (S2) que traduz um programa na linguagem simbólica LS2 para
+  a linguagem de máquina LM2. Vale ressaltar que a saída deste módulo é um código objeto  para
+  o módulo de ligação. O código deste montador está localizado em "../../src/S2".
 		
-	- B.2 O programa exemplo mostrado na parte A foi traduzido, linkado e executado. O código LS2
-	e  os códigos  objeto  (saída do montador) e em  linguagem  de máquina (saída do linker)  são 
-	apresentados no diretório: "./B.2".
+- B.2 O programa exemplo mostrado na parte A foi traduzido, linkado e executado. O código  LS2
+  e  os códigos  objeto  (saída do montador) e em  linguagem  de máquina (saída do linker) são 
+  apresentados no diretório: "./B.2".
 		
-	B.3 Foi escrito  um programa em  LS2 para  calcular o  resto da divisão  de um número  inteiro
-	positivo por outro inteiro positivo. Para tanto, foi utilizado o algoritmo da divisão chinesa.
-	Este código foi então montado (traduzido), linkado e  executado. Os códigos LS2, assim como  o
-	código objeto gerado  pelo montador e o código .m2 final  gerado pelo  linker são apresentados 
-	no diretório "./B.3". Vale ressaltar que, primeiro, foi desenvolvido um código em C  para esta
-	divisão chinesa, o qual também está listado no mesmo diretório.
+- B.3 Foi escrito um programa em  LS2 para  calcular o  resto da divisão  de um número inteiro
+  positivo  por  outro  inteiro  positivo. Para  tanto, foi utilizado o  algoritmo da  divisão 
+  chinesa. Este  código foi  então montado (traduzido), linkado e  executado. Os códigos  LS2, 
+  assim como o código objeto gerado pelo montador e o código .m2 final  gerado pelo linker são 
+  apresentados no diretório "./B.3". Vale ressaltar que, primeiro, foi desenvolvido  um código 
+  em C  para esta divisão chinesa, o qual também está listado no mesmo diretório.
 	
 		*** OBS.1: A ENTRADA DO SIMULADOR (M2) É A SAÍDA DO LINKER (L2).
 		*** OBS.2: A ENTRADA DO LINKER (L2) É A SAÍDA DO MONTADOR (S2).
